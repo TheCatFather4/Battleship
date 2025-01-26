@@ -27,9 +27,7 @@ namespace Battleship.UI.Actions
         }
 
         /// <summary>
-        /// This method examines an incoming coordinate from a shot.
-        /// If the coordinate matches one of the coordinates of the ship, and it hasn't been hit yet,
-        /// it becomes marked as hit. It then checks to see if the ship has any hits left.
+        /// Examines an incoming coordinate from a shot to see if it matches one of its own coordinates.
         /// </summary>
         /// <param name="incoming">The incoming coordinate to be examined</param>
         /// <returns>The result of the shot</returns>
