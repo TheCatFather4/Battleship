@@ -19,5 +19,22 @@ namespace Battleship.UI.DTOs
             X = x;
             Y = y;
         }
+
+        /// <summary>
+        /// An override of the Equals().
+        /// It compares the data of the incoming coordinate against the data of the invoking coordinate.
+        /// </summary>
+        /// <param name="obj">The incoming Coordinate object</param>
+        /// <returns>True if incoming obj is a coordinate</returns>
+        public override bool Equals(object? obj)
+        {
+            if (obj is Coordinate)
+            {
+                Coordinate incoming = (Coordinate)obj;
+                return incoming.X == X && incoming.Y == Y;
+            }
+
+            return false;
+        }
     }
 }

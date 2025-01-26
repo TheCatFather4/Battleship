@@ -1,4 +1,5 @@
 ﻿using Battleship.UI.DTOs;
+using Battleship.UI.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,33 @@ namespace Battleship.UI.Actions
             Coordinates = coordinates;
             HitsLeft = coordinates.Length;
             Name = name;
+        }
+
+        /// <summary>
+        /// This method examines an incoming coordinate from a shot.
+        /// If the coordinate matches one of the coordinates of the ship, and it hasn't been hit yet,
+        /// it becomes marked as hit. It then checks to see if the ship has any hits left.
+        /// </summary>
+        /// <param name="incoming">The incoming coordinate to be examined</param>
+        /// <returns>The result of the shot</returns>
+        public ShotResult ExamineShot(Coordinate incoming)
+        {
+            for (int i = 0; i < Coordinates.Length; i++)
+            {
+                if (Coordinates[i].Equals(incoming) && !Coordinates[i].IsHit)
+                {
+                    Coordinates[i].IsHit = true;
+                    HitsLeft--;
+                    if (HitsLeft == 0)
+                    {
+                        return ShotResult.HitAndSunk;
+                    }
+
+                    return ShotResult.Hit;
+                }
+            }
+
+            return ShotResult.Miss;
         }
     }
 }
