@@ -78,5 +78,46 @@ namespace Battleship.UI.Actions
 
             return new Ship(name, coordinates);
         }
+
+        /// <summary>
+        /// Uses IsOffBoard() and BuildShip() to prepare a ship object for placement.
+        /// If there is a ship object in the fleet, each coordinate of our newly created ship is checked against
+        /// each coordinate of the ship in the fleet. Each ship in the fleet is checked for overlap.
+        /// </summary>
+        /// <param name="name">The name of the ship to be placed</param>
+        /// <param name="size">The number of coordinates to be in the ship's coordinate array</param>
+        /// <param name="start">The starting coordinate used to build the other coordinates in BuildShip()</param>
+        /// <param name="direction">The direction in which the ship is to be placed</param>
+        /// <returns>A placement result enum in accord with the result</returns>
+        public PlacementResult PlaceShip(string name, int size, ShipCoordinate start, ShipDirection direction)
+        {
+            if (IsOffBoard(size, start, direction))
+            {
+                return PlacementResult.OffBoard;
+            }
+
+            Ship ship = BuildShip(name, size, start, direction);
+
+            for (int i = 0; i < Fleet.Length; i++)
+            {
+                if (Fleet[i] != null)
+                {
+                    for (int j = 0; j < ship.Coordinates.Length; j++)
+                    {
+                        if (Fleet[i].HasCoordinate(ship.Coordinates[j]))
+                        {
+                            return PlacementResult.Overlap;
+                        }
+                    }
+                }
+                else
+                {
+                    Fleet[i] = ship;
+                    return PlacementResult.Success;
+                }
+            }
+
+            return PlacementResult.Error;
+        }
     }
 }

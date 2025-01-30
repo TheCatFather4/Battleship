@@ -50,5 +50,24 @@ namespace Battleship.UI.Actions
 
             return ShotResult.Miss;
         }
+
+        /// <summary>
+        /// Checks a single coordinate from another ship with all the coordinates
+        /// of this ship
+        /// </summary>
+        /// <param name="osc">The other ship coordinate</param>
+        /// <returns>True if the other ship coordinate is the same as a coordinate of this ship. False if not</returns>
+        public bool HasCoordinate(Coordinate osc)
+        {
+            for (int i = 0; i < Coordinates.Length; i++)
+            {
+                if (Coordinates[i].Equals(osc))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
