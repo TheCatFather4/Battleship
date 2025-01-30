@@ -14,6 +14,21 @@ namespace Battleship.UI.Actions
     public class BoardManager
     {
         public Ship[] Fleet { get; private set; } = new Ship[5];
+        public bool GameOver
+        {
+            get
+            {
+                for (int i = 0; i < Fleet.Length; i++)
+                {
+                    if (!Fleet[i].IsSunk)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
 
         /// <summary>
         /// Checks to see if a ship's potential coordinates will go outside the bounds of the gameboard.
@@ -118,6 +133,33 @@ namespace Battleship.UI.Actions
             }
 
             return PlacementResult.Error;
+        }
+
+        /// <summary>
+        /// Examines the fleet of ships and invokes ExamineShot() to see if an incoming coordinate
+        /// is present on any of the ships. It checks each ship one by one through the loop.
+        /// </summary>
+        /// <param name="incoming">The incoming shot</param>
+        /// <returns>Miss by default, or Hit/HitAndSunk if coordinate is detected</returns>
+        public ShotResult ExamineFleet(Coordinate incoming)
+        {
+            ShotResult result = ShotResult.Miss;
+
+            for (int i = 0; i < Fleet.Length; i++)
+            {
+                if (!Fleet[i].IsSunk)
+                {
+                    //if it returns miss, we loop to the next ship in the fleet
+                    result = Fleet[i].ExamineShot(incoming);
+
+                    if (result != ShotResult.Miss)
+                    {
+                        return result;
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
