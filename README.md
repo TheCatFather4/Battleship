@@ -1,4 +1,5 @@
 # Battleship
-A solution of projects that contains code to run the classic game; Battleship as a console application.
 
-This repository will be updated over time. Check back for new updates!
+## About
+This repository contains the code for the classic game; Battleship.<br>
+The app is written in C# and runs in the command prompt.<br>
