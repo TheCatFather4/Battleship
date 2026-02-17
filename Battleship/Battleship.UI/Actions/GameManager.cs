@@ -9,12 +9,19 @@ namespace Battleship.UI.Actions
         public string Name { get; private set; }
         public GridManager Grid { get; private set; }
         public ShotHistoryManager Shot { get; private set; }
+        public int Score { get; private set; }
 
         public GameManager(string name)
         {
             Name = name;
             Grid = new GridManager();
             Shot = new ShotHistoryManager();
+            Score = 0;
+        }
+
+        public void AddPoint()
+        {
+            Score++;
         }
 
         public ShipPlacementResult PlaceShipOnBoard(string shipName, int size)
@@ -23,7 +30,7 @@ namespace Battleship.UI.Actions
 
             do
             {
-                string coordinate = Prompter.GetStringCoordinate($"\n{Name}, please enter the starting coordinate for your ship: ");
+                string coordinate = Prompter.GetStringCoordinate($"{Name}, please enter the starting coordinate for your ship: ");
 
                 Coordinate? start = Converter.StringToCoordinate(coordinate);
 
@@ -40,7 +47,7 @@ namespace Battleship.UI.Actions
                         Grid.AddShip(shipName, size, direction, start);
                         Console.Clear();
                         Printer.PrintShipsOnBoard(Grid.ships);
-                        Console.WriteLine($"\nYou have successfully placed your {shipName}.");
+                        Console.WriteLine($"You have successfully placed your {shipName}.");
                         Prompter.AnyKey();
                         return ShipPlacementResult.Success;
                     }

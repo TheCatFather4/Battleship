@@ -11,16 +11,12 @@ namespace Battleship.UI.Workflows
         {
             Printer.PrintTitle();
             Prompter.AnyKey();
-            string p1Name = Prompter.GetPlayerName("Player 1, please enter your name: ");
-            string p2Name = Prompter.GetPlayerName("Player 2, please enter your name: ");
             Console.Clear();
 
-            // game setup
-            int points1 = 0;
-            int points2 = 0;
+            GameManager mgr = new GameManager(Prompter.GetPlayerName("Player 1, please enter your name: "));
+            GameManager mgr2 = new GameManager(Prompter.GetPlayerName("Player 2, please enter your name: "));
             string winner;
-            GameManager mgr = new GameManager(p1Name);
-            GameManager mgr2 = new GameManager(p2Name);
+            Console.Clear();
 
             Printer.PrintShipsOnBoard(mgr.Grid.ships);
             mgr.PlaceShipOnBoard("Aircraft Carrier", 5);
@@ -52,7 +48,7 @@ namespace Battleship.UI.Workflows
                 {
                     Printer.PrintShotHistory(mgr.Shot.ShotHistory);
                     Console.WriteLine();
-                    string sc = Prompter.GetStringCoordinate($"{p1Name}, enter a coordinate to fire at: ");
+                    string sc = Prompter.GetStringCoordinate($"{mgr.Name}, enter a coordinate to fire at: ");
                     Coordinate? c = Converter.StringToCoordinate(sc);
                     int element = Converter.CoordinateToElement(c);
                     Console.Clear();
@@ -65,7 +61,7 @@ namespace Battleship.UI.Workflows
                         {
                             mgr.Shot.AddToShotHistory(element, c, "H");
                             Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("\nBoom! You hit something.");
+                            Console.WriteLine("Boom! You hit something.");
                             Prompter.AnyKey();
                             break;
                         }
@@ -73,7 +69,7 @@ namespace Battleship.UI.Workflows
                         {
                             mgr.Shot.AddToShotHistory(element, c, "M");
                             Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("\nSplash! You missed.");
+                            Console.WriteLine("Splash! You missed.");
                             Prompter.AnyKey();
                             break;
                         }
@@ -81,9 +77,9 @@ namespace Battleship.UI.Workflows
                         {
                             mgr.Shot.AddToShotHistory(element, c, "H");
                             Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("\nKaboom! You sunk a ship!");
-                            points1++;
-                            Console.WriteLine($"| {p1Name}'s score: {points1} | {p2Name}'s score: {points2} |");
+                            Console.WriteLine("Kaboom! You sunk a ship!");
+                            mgr.AddPoint();
+                            Printer.PrintScore(mgr, mgr2);
                             Prompter.AnyKey();
                             break;
                         }
@@ -91,14 +87,14 @@ namespace Battleship.UI.Workflows
                     else
                     {
                         Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                        Console.WriteLine("\nYou already fired at that coordinate. Please pick another one.");
+                        Console.WriteLine("You already fired at that coordinate. Please pick another one.");
                     }
                 }
                 while (true);
 
-                if (points1 == 5)
+                if (mgr.Score == 5)
                 {
-                    winner = p1Name;
+                    winner = mgr.Name;
                     break;
                 }
 
@@ -107,7 +103,7 @@ namespace Battleship.UI.Workflows
                 {
                     Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
                     Console.WriteLine();
-                    string sc = Prompter.GetStringCoordinate($"{p2Name}, enter a coordinate to fire at: ");
+                    string sc = Prompter.GetStringCoordinate($"{mgr2.Name}, enter a coordinate to fire at: ");
                     Coordinate? c = Converter.StringToCoordinate(sc);
                     int element = Converter.CoordinateToElement(c);
                     Console.Clear();
@@ -120,7 +116,7 @@ namespace Battleship.UI.Workflows
                         {
                             mgr2.Shot.AddToShotHistory(element, c, "H");
                             Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("\nBoom! You hit something.");
+                            Console.WriteLine("Boom! You hit something.");
                             Prompter.AnyKey();
                             break;
                         }
@@ -128,7 +124,7 @@ namespace Battleship.UI.Workflows
                         {
                             mgr2.Shot.AddToShotHistory(element, c, "M");
                             Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("\nSplash! You missed.");
+                            Console.WriteLine("Splash! You missed.");
                             Prompter.AnyKey();
                             break;
                         }
@@ -136,9 +132,9 @@ namespace Battleship.UI.Workflows
                         {
                             mgr2.Shot.AddToShotHistory(element, c, "H");
                             Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("\nKaboom! You sunk a ship!");
-                            points2++;
-                            Console.WriteLine($"| {p2Name}'s score: {points1} | {p1Name}'s score: {points2} |");
+                            Console.WriteLine("Kaboom! You sunk a ship!");
+                            mgr2.AddPoint();
+                            Printer.PrintScore(mgr, mgr2);
                             Prompter.AnyKey();
                             break;
                         }
@@ -146,14 +142,14 @@ namespace Battleship.UI.Workflows
                     else
                     {
                         Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                        Console.WriteLine("\nYou already fired at that coordinate. Please pick another one.");
+                        Console.WriteLine("You already fired at that coordinate. Please pick another one.");
                     }
                 }
                 while (true);
 
-                if (points2 == 5)
+                if (mgr2.Score == 5)
                 {
-                    winner = p2Name;
+                    winner = mgr2.Name;
                     break;
                 }
 

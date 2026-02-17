@@ -1,36 +1,15 @@
-﻿using Battleship.UI.DTOs;
+﻿using Battleship.UI.Actions;
+using Battleship.UI.DTOs;
 
 namespace Battleship.UI.Utilities
 {
     public static class Printer
     {
-        public static void PrintEmptyBoard()
+        public static void PrintScore(GameManager p1, GameManager p2)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("|   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10|");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| A | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| B | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| C | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| D | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| E | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| F | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| G | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| H | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| I | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("| J | o | o | o | o | o | o | o | o | o | o |");
-            Console.WriteLine("---------------------------------------------");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("========================================================");
+            Console.WriteLine($"| {p1.Name}'s score: {p1.Score} | {p2.Name}'s score: {p2.Score} |");
+            Console.WriteLine("========================================================");
         }
 
         public static void PrintShipInfo(string name, int size)
