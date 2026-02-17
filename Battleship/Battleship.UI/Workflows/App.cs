@@ -1,6 +1,5 @@
-﻿using Battleship.UI.Actions;
-using Battleship.UI.DTOs;
-using Battleship.UI.Enums;
+﻿using Battleship.UI.Enums;
+using Battleship.UI.Implementations;
 using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Workflows
@@ -11,152 +10,109 @@ namespace Battleship.UI.Workflows
         {
             Printer.PrintTitle();
             Prompter.AnyKey();
+
+            var p1 = new HumanPlayer(Prompter.GetPlayerName("Player 1, please enter your name: "));
+            var p2 = new HumanPlayer(Prompter.GetPlayerName("Player 2, please enter your name: "));
             Console.Clear();
 
-            GameManager mgr = new GameManager(Prompter.GetPlayerName("Player 1, please enter your name: "));
-            GameManager mgr2 = new GameManager(Prompter.GetPlayerName("Player 2, please enter your name: "));
+            p1.PlaceShips();
+            p2.PlaceShips();
+
             string winner;
-            Console.Clear();
 
-            Printer.PrintShipsOnBoard(mgr.Grid.ships);
-            mgr.PlaceShipOnBoard("Aircraft Carrier", 5);
-            Printer.PrintShipsOnBoard(mgr.Grid.ships);
-            mgr.PlaceShipOnBoard("Battleship", 4);
-            Printer.PrintShipsOnBoard(mgr.Grid.ships);
-            mgr.PlaceShipOnBoard("Cruiser", 3);
-            Printer.PrintShipsOnBoard(mgr.Grid.ships);
-            mgr.PlaceShipOnBoard("Submarine", 3);
-            Printer.PrintShipsOnBoard(mgr.Grid.ships);
-            mgr.PlaceShipOnBoard("Destroyer", 2);
-
-            Printer.PrintShipsOnBoard(mgr2.Grid.ships);
-            mgr2.PlaceShipOnBoard("Aircraft Carrier", 5);
-            Printer.PrintShipsOnBoard(mgr2.Grid.ships);
-            mgr2.PlaceShipOnBoard("Battleship", 4);
-            Printer.PrintShipsOnBoard(mgr2.Grid.ships);
-            mgr2.PlaceShipOnBoard("Cruiser", 3);
-            Printer.PrintShipsOnBoard(mgr2.Grid.ships);
-            mgr2.PlaceShipOnBoard("Submarine", 3);
-            Printer.PrintShipsOnBoard(mgr2.Grid.ships);
-            mgr2.PlaceShipOnBoard("Destroyer", 2);
-
-            // game flow
             do
             {
                 // player 1 turn
                 do
                 {
-                    Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                    Console.WriteLine();
-                    string sc = Prompter.GetStringCoordinate($"{mgr.Name}, enter a coordinate to fire at: ");
-                    Coordinate? c = Converter.StringToCoordinate(sc);
-                    int element = Converter.CoordinateToElement(c);
-                    Console.Clear();
+                    var shot = p1.FireShot();
+                    ShotResult result = p2.Mgr.ReceiveShot(shot);
 
-                    if (mgr.Shot.ShotHistory[element] == null)
+                    if (result == ShotResult.Hit)
                     {
-                        ShotResult result = mgr2.ReceiveShot(c);
-
-                        if (result == ShotResult.Hit)
-                        {
-                            mgr.Shot.AddToShotHistory(element, c, "H");
-                            Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("Boom! You hit something.");
-                            Prompter.AnyKey();
-                            break;
-                        }
-                        else if (result == ShotResult.Miss)
-                        {
-                            mgr.Shot.AddToShotHistory(element, c, "M");
-                            Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("Splash! You missed.");
-                            Prompter.AnyKey();
-                            break;
-                        }
-                        else if (result == ShotResult.HitAndSunk)
-                        {
-                            mgr.Shot.AddToShotHistory(element, c, "H");
-                            Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                            Console.WriteLine("Kaboom! You sunk a ship!");
-                            mgr.AddPoint();
-                            Printer.PrintScore(mgr, mgr2);
-                            Prompter.AnyKey();
-                            break;
-                        }
+                        p1.Mgr.Shot.AddToShotHistory(shot, "H");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Boom! You hit something.");
+                        Prompter.AnyKey();
+                        break;
                     }
-                    else
+                    else if (result == ShotResult.Miss)
                     {
-                        Printer.PrintShotHistory(mgr.Shot.ShotHistory);
-                        Console.WriteLine("You already fired at that coordinate. Please pick another one.");
+                        p1.Mgr.Shot.AddToShotHistory(shot, "M");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Splash! You missed.");
+                        Prompter.AnyKey();
+                        break;
+                    }
+                    else if (result == ShotResult.HitAndSunk)
+                    {
+                        p1.Mgr.Shot.AddToShotHistory(shot, "H");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Kaboom! You sunk a ship!");
+                        p1.Mgr.AddPoint();
+                        Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
+                        Prompter.AnyKey();
+                        break;
                     }
                 }
                 while (true);
 
-                if (mgr.Score == 5)
+                if (p1.Mgr.Score == 5)
                 {
-                    winner = mgr.Name;
+                    winner = p1.Name;
                     break;
                 }
 
                 // player 2 turn
                 do
                 {
-                    Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                    Console.WriteLine();
-                    string sc = Prompter.GetStringCoordinate($"{mgr2.Name}, enter a coordinate to fire at: ");
-                    Coordinate? c = Converter.StringToCoordinate(sc);
-                    int element = Converter.CoordinateToElement(c);
-                    Console.Clear();
+                    var shot = p2.FireShot();
+                    ShotResult result = p1.Mgr.ReceiveShot(shot);
 
-                    if (mgr2.Shot.ShotHistory[element] == null)
+                    if (result == ShotResult.Hit)
                     {
-                        ShotResult result = mgr.ReceiveShot(c);
-
-                        if (result == ShotResult.Hit)
-                        {
-                            mgr2.Shot.AddToShotHistory(element, c, "H");
-                            Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("Boom! You hit something.");
-                            Prompter.AnyKey();
-                            break;
-                        }
-                        else if (result == ShotResult.Miss)
-                        {
-                            mgr2.Shot.AddToShotHistory(element, c, "M");
-                            Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("Splash! You missed.");
-                            Prompter.AnyKey();
-                            break;
-                        }
-                        else if (result == ShotResult.HitAndSunk)
-                        {
-                            mgr2.Shot.AddToShotHistory(element, c, "H");
-                            Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                            Console.WriteLine("Kaboom! You sunk a ship!");
-                            mgr2.AddPoint();
-                            Printer.PrintScore(mgr, mgr2);
-                            Prompter.AnyKey();
-                            break;
-                        }
+                        p2.Mgr.Shot.AddToShotHistory(shot, "H");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Boom! You hit something.");
+                        Prompter.AnyKey();
+                        break;
                     }
-                    else
+                    else if (result == ShotResult.Miss)
                     {
-                        Printer.PrintShotHistory(mgr2.Shot.ShotHistory);
-                        Console.WriteLine("You already fired at that coordinate. Please pick another one.");
+                        p2.Mgr.Shot.AddToShotHistory(shot, "M");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Splash! You missed.");
+                        Prompter.AnyKey();
+                        break;
+                    }
+                    else if (result == ShotResult.HitAndSunk)
+                    {
+                        p2.Mgr.Shot.AddToShotHistory(shot, "H");
+                        Console.Clear();
+                        Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
+                        Console.WriteLine("Kaboom! You sunk a ship!");
+                        p2.Mgr.AddPoint();
+                        Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
+                        Prompter.AnyKey();
+                        break;
                     }
                 }
                 while (true);
 
-                if (mgr2.Score == 5)
+                if (p2.Mgr.Score == 5)
                 {
-                    winner = mgr2.Name;
+                    winner = p2.Name;
                     break;
                 }
-
             }
             while (true);
 
-            Console.WriteLine($"\nCongratulations {winner}! You won the game!");
+            Console.WriteLine($"Congratulations {winner}! You won the game!");
         }
     }
 }

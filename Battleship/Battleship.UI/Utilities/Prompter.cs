@@ -28,7 +28,7 @@
                 {
                     Console.WriteLine("The direction must be (V)ertical or (H)orizontal.");
                 }
-             }
+            }
             while (true);
         }
 
@@ -64,7 +64,7 @@
                 {
                     Console.WriteLine("A coordinate is requirerd.");
                 }
-                else if (Converter.LetterToNumber(coord.Substring(0,1)) == -1)
+                else if (Converter.LetterToNumber(coord.Substring(0, 1)) == -1)
                 {
                     Console.WriteLine("A coordinate must start with a letter, and can only be A-J.");
                 }

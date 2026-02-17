@@ -1,14 +1,13 @@
-﻿using Battleship.UI.Actions;
-using Battleship.UI.DTOs;
+﻿using Battleship.UI.DTOs;
 
 namespace Battleship.UI.Utilities
 {
     public static class Printer
     {
-        public static void PrintScore(GameManager p1, GameManager p2)
+        public static void PrintScore(string name1, int score1, string name2, int score2)
         {
             Console.WriteLine("========================================================");
-            Console.WriteLine($"| {p1.Name}'s score: {p1.Score} | {p2.Name}'s score: {p2.Score} |");
+            Console.WriteLine($"| {name1}'s score: {score1} | {name2}'s score: {score2} |");
             Console.WriteLine("========================================================");
         }
 

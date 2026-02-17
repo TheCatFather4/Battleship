@@ -1,4 +1,5 @@
 ﻿using Battleship.UI.DTOs;
+using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Actions
 {
@@ -11,9 +12,9 @@ namespace Battleship.UI.Actions
             ShotHistory = new ShotHistoryCoordinate[100];
         }
 
-        public void AddToShotHistory(int element, Coordinate shot, string letter)
+        public void AddToShotHistory(Coordinate shot, string letter)
         {
-            ShotHistory[element] = new ShotHistoryCoordinate(shot.X, shot.Y, letter);
+            ShotHistory[Converter.CoordinateToElement(shot)] = new ShotHistoryCoordinate(shot.X, shot.Y, letter);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Battleship.UI.Actions;
 using Battleship.UI.DTOs;
 using Battleship.UI.Enums;
+using Battleship.UI.Implementations;
 using NUnit.Framework;
 
 namespace Battleship.Tests
@@ -10,7 +11,7 @@ namespace Battleship.Tests
     {
         public GameManager SetUpGrid()
         {
-            var mgr = new GameManager("Player 1");
+            var mgr = new GameManager();
             mgr.Grid.AddShip("Aircraft Carrier", 5, "V", new Coordinate(1, 1));
             mgr.Grid.AddShip("Battleship", 4, "V", new Coordinate(1, 3));
             mgr.Grid.AddShip("Cruiser", 3, "V", new Coordinate(1, 5));
@@ -22,10 +23,11 @@ namespace Battleship.Tests
         [Test]
         public void AddToShotHistory_Success()
         {
-            var mgr = new ShotHistoryManager();
-            mgr.AddToShotHistory(4, new Coordinate(1, 5), "H");
-            Assert.That(mgr.ShotHistory[4].X, Is.EqualTo(1));
-            Assert.That(mgr.ShotHistory[4].Y, Is.EqualTo(5));
+            var p1 = new HumanPlayer("Player1");
+
+            p1.Mgr.Shot.AddToShotHistory(new Coordinate(1, 5), "H");
+            Assert.That(p1.Mgr.Shot.ShotHistory[4].X, Is.EqualTo(1));
+            Assert.That(p1.Mgr.Shot.ShotHistory[4].Y, Is.EqualTo(5));
         }
 
         [Test]
