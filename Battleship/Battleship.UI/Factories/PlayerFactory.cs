@@ -1,0 +1,37 @@
+﻿using Battleship.UI.Implementations;
+using Battleship.UI.Interfaces;
+using Battleship.UI.Utilities;
+
+namespace Battleship.UI.Factories
+{
+    public class PlayerFactory
+    {
+        public IPlayer CreateNewPlayer(int num)
+        {
+            do
+            {
+                Console.Write($"Is Player {num} a (H)uman or a (C)omputer?: ");
+                string? input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("This field is required.");
+                }
+                else if (input == "H")
+                {
+                    string name = Prompter.GetPlayerName($"Player {num}, please enter your name: ");
+                    return new HumanPlayer(name);
+                }
+                else if (input == "C")
+                {
+                    return new ComputerPlayer("Computer");
+                }
+                else
+                {
+                    Console.WriteLine("You must select either C or H.");
+                }
+            }
+            while (true);
+        }
+    }
+}

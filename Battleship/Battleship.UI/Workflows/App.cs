@@ -1,5 +1,5 @@
 ﻿using Battleship.UI.Enums;
-using Battleship.UI.Implementations;
+using Battleship.UI.Factories;
 using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Workflows
@@ -8,11 +8,13 @@ namespace Battleship.UI.Workflows
     {
         public void Run()
         {
+            PlayerFactory factory = new PlayerFactory();
+
             Printer.PrintTitle();
             Prompter.AnyKey();
 
-            var p1 = new HumanPlayer(Prompter.GetPlayerName("Player 1, please enter your name: "));
-            var p2 = new HumanPlayer(Prompter.GetPlayerName("Player 2, please enter your name: "));
+            var p1 = factory.CreateNewPlayer(1);
+            var p2 = factory.CreateNewPlayer(2);
             Console.Clear();
 
             p1.PlaceShips();
@@ -33,7 +35,7 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Boom! You hit something.");
+                        Printer.PrintHit(p1.Name);
                         Prompter.AnyKey();
                         break;
                     }
@@ -42,7 +44,7 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "M");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Splash! You missed.");
+                        Printer.PrintMiss(p1.Name);
                         Prompter.AnyKey();
                         break;
                     }
@@ -51,7 +53,7 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Kaboom! You sunk a ship!");
+                        Printer.PrintSunk(p1.Name);
                         p1.Mgr.AddPoint();
                         Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
                         Prompter.AnyKey();
@@ -77,7 +79,7 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Boom! You hit something.");
+                        Printer.PrintHit(p2.Name);
                         Prompter.AnyKey();
                         break;
                     }
@@ -86,7 +88,7 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "M");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Splash! You missed.");
+                        Printer.PrintMiss(p2.Name);
                         Prompter.AnyKey();
                         break;
                     }
@@ -95,7 +97,7 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
-                        Console.WriteLine("Kaboom! You sunk a ship!");
+                        Printer.PrintSunk(p2.Name);
                         p2.Mgr.AddPoint();
                         Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
                         Prompter.AnyKey();

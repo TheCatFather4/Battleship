@@ -4,6 +4,30 @@ namespace Battleship.UI.Utilities
 {
     public static class Printer
     {
+        public static void PrintHit(string name)
+        {
+            if (name == "Computer")
+            {
+                Console.WriteLine("Boom! The Computer player hit something.");
+            }
+            else
+            {
+                Console.WriteLine("Boom! You hit something.");
+            }
+        }
+
+        public static void PrintMiss(string name)
+        {
+            if (name == "Computer")
+            {
+                Console.WriteLine("Splash! The Computer player missed.");
+            }
+            else
+            {
+                Console.WriteLine("Splash! You missed.");
+            }
+        }
+
         public static void PrintScore(string name1, int score1, string name2, int score2)
         {
             Console.WriteLine("========================================================");
@@ -178,6 +202,18 @@ namespace Battleship.UI.Utilities
 
             Console.WriteLine("\n---------------------------------------------");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void PrintSunk(string name)
+        {
+            if (name == "Computer")
+            {
+                Console.WriteLine("Kaboom! The computer player sunk a ship!");
+            }
+            else
+            {
+                Console.WriteLine("Kaboom! You sunk a ship!");
+            }
         }
 
         public static void PrintTitle()

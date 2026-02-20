@@ -16,20 +16,6 @@ namespace Battleship.UI.Implementations
             Mgr = new GameManager();
         }
 
-        public void PlaceShips()
-        {
-            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
-            Mgr.PlaceShipOnBoard(Name, "Aircraft Carrier", 5);
-            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
-            Mgr.PlaceShipOnBoard(Name, "Battleship", 4);
-            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
-            Mgr.PlaceShipOnBoard(Name, "Cruiser", 3);
-            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
-            Mgr.PlaceShipOnBoard(Name, "Submarine", 3);
-            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
-            Mgr.PlaceShipOnBoard(Name, "Destroyer", 2);
-        }
-
         public Coordinate FireShot()
         {
             Printer.PrintShotHistory(Mgr.Shot.ShotHistory);
@@ -51,6 +37,20 @@ namespace Battleship.UI.Implementations
                 }
             }
             while (true);
+        }
+
+        public void PlaceShips()
+        {
+            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
+            Mgr.PlaceShipOnBoard(Name, "Aircraft Carrier", 5);
+            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
+            Mgr.PlaceShipOnBoard(Name, "Battleship", 4);
+            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
+            Mgr.PlaceShipOnBoard(Name, "Cruiser", 3);
+            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
+            Mgr.PlaceShipOnBoard(Name, "Submarine", 3);
+            Printer.PrintShipsOnBoard(Mgr.Grid.ships);
+            Mgr.PlaceShipOnBoard(Name, "Destroyer", 2);
         }
     }
 }
