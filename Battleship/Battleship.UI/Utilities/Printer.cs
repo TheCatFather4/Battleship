@@ -8,11 +8,11 @@ namespace Battleship.UI.Utilities
         {
             if (name == "Computer")
             {
-                Console.WriteLine("Boom! The Computer player hit something.");
+                Console.Write("Boom! The Computer player hit something. ");
             }
             else
             {
-                Console.WriteLine("Boom! You hit something.");
+                Console.Write("Boom! You hit something. ");
             }
         }
 
@@ -20,11 +20,11 @@ namespace Battleship.UI.Utilities
         {
             if (name == "Computer")
             {
-                Console.WriteLine("Splash! The Computer player missed.");
+                Console.Write("Splash! The Computer player missed. ");
             }
             else
             {
-                Console.WriteLine("Splash! You missed.");
+                Console.Write("Splash! You missed. ");
             }
         }
 
@@ -208,11 +208,11 @@ namespace Battleship.UI.Utilities
         {
             if (name == "Computer")
             {
-                Console.WriteLine("Kaboom! The computer player sunk a ship!");
+                Console.Write("Kaboom! The computer player sunk a ship! ");
             }
             else
             {
-                Console.WriteLine("Kaboom! You sunk a ship!");
+                Console.Write("Kaboom! You sunk a ship! ");
             }
         }
 

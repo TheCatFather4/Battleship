@@ -2,9 +2,9 @@
 {
     public static class Prompter
     {
-        public static void AnyKey()
+        public static void AnyKey(string words)
         {
-            Console.Write("Press any key to continue...");
+            Console.Write($"Press any key to {words}...");
             Console.ReadKey();
             Console.Clear();
         }

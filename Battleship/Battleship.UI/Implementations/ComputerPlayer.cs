@@ -40,6 +40,8 @@ namespace Battleship.UI.Implementations
             PlaceShip("Cruiser", 3);
             PlaceShip("Submarine", 3);
             PlaceShip("Destroyer", 2);
+            Console.WriteLine("The Computer player has placed all of their ships.");
+            Prompter.AnyKey("to start the game");
         }
 
         private void PlaceShip(string shipName, int size)

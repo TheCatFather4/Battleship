@@ -19,7 +19,6 @@ namespace Battleship.UI.Implementations
         public Coordinate FireShot()
         {
             Printer.PrintShotHistory(Mgr.Shot.ShotHistory);
-            Console.WriteLine();
 
             do
             {

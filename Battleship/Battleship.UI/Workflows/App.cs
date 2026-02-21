@@ -11,7 +11,7 @@ namespace Battleship.UI.Workflows
             PlayerFactory factory = new PlayerFactory();
 
             Printer.PrintTitle();
-            Prompter.AnyKey();
+            Prompter.AnyKey("begin");
 
             var p1 = factory.CreateNewPlayer(1);
             var p2 = factory.CreateNewPlayer(2);
@@ -35,8 +35,9 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
+                        Console.WriteLine($"{p1.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
                         Printer.PrintHit(p1.Name);
-                        Prompter.AnyKey();
+                        Prompter.AnyKey("continue");
                         break;
                     }
                     else if (result == ShotResult.Miss)
@@ -44,8 +45,9 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "M");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
+                        Console.WriteLine($"{p1.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
                         Printer.PrintMiss(p1.Name);
-                        Prompter.AnyKey();
+                        Prompter.AnyKey("continue");
                         break;
                     }
                     else if (result == ShotResult.HitAndSunk)
@@ -53,10 +55,11 @@ namespace Battleship.UI.Workflows
                         p1.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p1.Mgr.Shot.ShotHistory);
-                        Printer.PrintSunk(p1.Name);
                         p1.Mgr.AddPoint();
                         Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
-                        Prompter.AnyKey();
+                        Console.WriteLine($"{p1.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
+                        Printer.PrintSunk(p1.Name);
+                        Prompter.AnyKey("continue");
                         break;
                     }
                 }
@@ -79,8 +82,9 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
+                        Console.WriteLine($"{p2.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
                         Printer.PrintHit(p2.Name);
-                        Prompter.AnyKey();
+                        Prompter.AnyKey("continue");
                         break;
                     }
                     else if (result == ShotResult.Miss)
@@ -88,8 +92,9 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "M");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
+                        Console.WriteLine($"{p2.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
                         Printer.PrintMiss(p2.Name);
-                        Prompter.AnyKey();
+                        Prompter.AnyKey("continue");
                         break;
                     }
                     else if (result == ShotResult.HitAndSunk)
@@ -97,10 +102,11 @@ namespace Battleship.UI.Workflows
                         p2.Mgr.Shot.AddToShotHistory(shot, "H");
                         Console.Clear();
                         Printer.PrintShotHistory(p2.Mgr.Shot.ShotHistory);
-                        Printer.PrintSunk(p2.Name);
                         p2.Mgr.AddPoint();
                         Printer.PrintScore(p1.Name, p1.Mgr.Score, p2.Name, p2.Mgr.Score);
-                        Prompter.AnyKey();
+                        Console.WriteLine($"{p2.Name} fired at coordinate {Converter.CoordinateToString(shot)}.");
+                        Printer.PrintSunk(p2.Name);
+                        Prompter.AnyKey("continue");
                         break;
                     }
                 }

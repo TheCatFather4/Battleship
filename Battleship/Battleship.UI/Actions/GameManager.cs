@@ -45,8 +45,8 @@ namespace Battleship.UI.Actions
                         Grid.AddShip(shipName, size, direction, start);
                         Console.Clear();
                         Printer.PrintShipsOnBoard(Grid.ships);
-                        Console.WriteLine($"You have successfully placed your {shipName}.");
-                        Prompter.AnyKey();
+                        Console.Write($"You have successfully placed your {shipName}. ");
+                        Prompter.AnyKey("continue");
                         return ShipPlacementResult.Success;
                     }
                     else

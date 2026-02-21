@@ -79,6 +79,47 @@ namespace Battleship.UI.Utilities
             return element;
         }
 
+        public static string CoordinateToString(Coordinate coord)
+        {
+            string letter = "";
+
+            switch (coord.X)
+            {
+                case 1:
+                    letter = "A";
+                    break;
+                case 2:
+                    letter = "B";
+                    break;
+                case 3:
+                    letter = "C";
+                    break;
+                case 4:
+                    letter = "D";
+                    break;
+                case 5:
+                    letter = "E";
+                    break;
+                case 6:
+                    letter = "F";
+                    break;
+                case 7:
+                    letter = "G";
+                    break;
+                case 8:
+                    letter = "H";
+                    break;
+                case 9:
+                    letter = "I";
+                    break;
+                case 10:
+                    letter = "J";
+                    break;
+            }
+
+            return $"{letter}{coord.Y}";
+        }
+
         public static int LetterToNumber(string letter)
         {
             switch (letter.ToUpper())
