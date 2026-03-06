@@ -9,6 +9,29 @@
             Console.Clear();
         }
 
+        public static string GetDifficultyMode()
+        {
+            do
+            {
+                Console.Write("Select the difficulty of the computer. (E)asy, (N)ormal, or (H)ard: ");
+                string? difficulty = Console.ReadLine()?.ToUpper();
+
+                if (string.IsNullOrEmpty(difficulty))
+                {
+                    Console.WriteLine("A difficulty setting is required.");
+                }
+                else if (difficulty == "E" || difficulty == "N" || difficulty == "H")
+                {
+                    return difficulty;
+                }
+                else
+                {
+                    Console.WriteLine("The difficulty must be (E)asy, (N)ormal, or (H)ard.");
+                }
+            }
+            while (true);
+        }
+
         public static string GetPlacementDirection(string prompt)
         {
             do
