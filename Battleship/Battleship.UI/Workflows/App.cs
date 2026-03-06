@@ -1,4 +1,5 @@
-﻿using Battleship.UI.Enums;
+﻿using Battleship.UI.DTOs;
+using Battleship.UI.Enums;
 using Battleship.UI.Factories;
 using Battleship.UI.Utilities;
 
@@ -27,7 +28,21 @@ namespace Battleship.UI.Workflows
                 // player 1 turn
                 do
                 {
-                    var shot = p1.FireShot();
+                    Coordinate? shot;
+
+                    if (p1.PlayerType == PlayerType.NormalComputer)
+                    {
+                        shot = ShotDifficulty.FireShotNormalMode(p2.Mgr.Grid.ships, p1);
+                    }
+                    else if (p1.PlayerType == PlayerType.HardComputer)
+                    {
+                        shot = ShotDifficulty.FireShotHardMode(p2.Mgr.Grid.ships, p1);
+                    }
+                    else
+                    {
+                        shot = p1.FireShot();
+                    }
+
                     ShotResult result = p2.Mgr.ReceiveShot(shot);
 
                     if (result == ShotResult.Hit)
@@ -74,7 +89,21 @@ namespace Battleship.UI.Workflows
                 // player 2 turn
                 do
                 {
-                    var shot = p2.FireShot();
+                    Coordinate? shot;
+
+                    if (p2.PlayerType == PlayerType.NormalComputer)
+                    {
+                        shot = ShotDifficulty.FireShotNormalMode(p1.Mgr.Grid.ships, p2);
+                    }
+                    else if (p2.PlayerType == PlayerType.HardComputer)
+                    {
+                        shot = ShotDifficulty.FireShotHardMode(p1.Mgr.Grid.ships, p2);
+                    }
+                    else
+                    {
+                        shot = p2.FireShot();
+                    }
+
                     ShotResult result = p1.Mgr.ReceiveShot(shot);
 
                     if (result == ShotResult.Hit)

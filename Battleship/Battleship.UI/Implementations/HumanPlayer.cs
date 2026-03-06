@@ -1,5 +1,6 @@
 ﻿using Battleship.UI.Actions;
 using Battleship.UI.DTOs;
+using Battleship.UI.Enums;
 using Battleship.UI.Interfaces;
 using Battleship.UI.Utilities;
 
@@ -9,11 +10,13 @@ namespace Battleship.UI.Implementations
     {
         public string Name { get; private set; }
         public GameManager Mgr { get; private set; }
+        public PlayerType PlayerType { get; private set; }
 
-        public HumanPlayer(string name)
+        public HumanPlayer(string name, PlayerType playerType)
         {
             Name = name;
             Mgr = new GameManager();
+            PlayerType = playerType;
         }
 
         public Coordinate FireShot()

@@ -1,4 +1,5 @@
-﻿using Battleship.UI.Implementations;
+﻿using Battleship.UI.Enums;
+using Battleship.UI.Implementations;
 using Battleship.UI.Interfaces;
 using Battleship.UI.Utilities;
 
@@ -8,6 +9,8 @@ namespace Battleship.UI.Factories
     {
         public IPlayer CreateNewPlayer(int num)
         {
+            PlayerType playerType;
+
             do
             {
                 Console.Write($"Is Player {num} a (H)uman or a (C)omputer?: ");
@@ -20,11 +23,26 @@ namespace Battleship.UI.Factories
                 else if (input == "H")
                 {
                     string name = Prompter.GetPlayerName($"Player {num}, please enter your name: ");
-                    return new HumanPlayer(name);
+                    playerType = PlayerType.Human;
+                    return new HumanPlayer(name, playerType);
                 }
                 else if (input == "C")
                 {
-                    return new ComputerPlayer("Computer");
+                    string mode = Prompter.GetDifficultyMode();
+                    if (mode == "E")
+                    {
+                        playerType = PlayerType.Computer;
+                    }
+                    else if (mode == "N")
+                    {
+                        playerType = PlayerType.NormalComputer;
+                    }
+                    else
+                    {
+                        playerType = PlayerType.HardComputer;
+                    }
+
+                    return new ComputerPlayer("Computer", playerType);
                 }
                 else
                 {

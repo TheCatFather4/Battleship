@@ -10,11 +10,13 @@ namespace Battleship.UI.Implementations
     {
         public string Name { get; private set; }
         public GameManager Mgr { get; private set; }
+        public PlayerType PlayerType { get; private set; }
 
-        public ComputerPlayer(string name)
+        public ComputerPlayer(string name, PlayerType playerType)
         {
             Name = name;
             Mgr = new GameManager();
+            PlayerType = playerType;
         }
 
         public Coordinate FireShot()
