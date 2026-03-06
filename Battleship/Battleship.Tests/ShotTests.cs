@@ -23,7 +23,10 @@ namespace Battleship.Tests
         [Test]
         public void AddToShotHistory_Success()
         {
-            var p1 = new HumanPlayer("Player1");
+            PlayerType pt = new PlayerType();
+            pt = PlayerType.Human;
+
+            var p1 = new HumanPlayer("Player1", pt);
 
             p1.Mgr.Shot.AddToShotHistory(new Coordinate(1, 5), "H");
             Assert.That(p1.Mgr.Shot.ShotHistory[4].X, Is.EqualTo(1));
