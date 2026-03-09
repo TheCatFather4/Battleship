@@ -6,6 +6,9 @@ using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Implementations
 {
+    /// <summary>
+    /// An implementation of the IPlayer interface.
+    /// </summary>
     public class ComputerPlayer : IPlayer
     {
         public string Name { get; private set; }
@@ -19,6 +22,10 @@ namespace Battleship.UI.Implementations
             PlayerType = playerType;
         }
 
+        /// <summary>
+        /// A random object is created a used to fire a random shot.
+        /// </summary>
+        /// <returns>A valid coordinate.</returns>
         public Coordinate FireShot()
         {
             do
@@ -35,6 +42,9 @@ namespace Battleship.UI.Implementations
             while (true);
         }
 
+        /// <summary>
+        /// The place ship flow for computer players.
+        /// </summary>
         public void PlaceShips()
         {
             PlaceShip("Aircraft Carrier", 5);
@@ -46,6 +56,11 @@ namespace Battleship.UI.Implementations
             Prompter.AnyKey("to start the game");
         }
 
+        /// <summary>
+        /// Used for placing an individual ship for computer players.
+        /// </summary>
+        /// <param name="shipName"></param>
+        /// <param name="size"></param>
         private void PlaceShip(string shipName, int size)
         {
             do

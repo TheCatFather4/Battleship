@@ -6,6 +6,9 @@ using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Implementations
 {
+    /// <summary>
+    /// Implementation of the IPlayer interface.
+    /// </summary>
     public class HumanPlayer : IPlayer
     {
         public string Name { get; private set; }
@@ -19,6 +22,11 @@ namespace Battleship.UI.Implementations
             PlayerType = playerType;
         }
 
+        /// <summary>
+        /// The user is prompted to pick a coordinate to fire a shot towards.
+        /// The user's shot history is provided for convenience.
+        /// </summary>
+        /// <returns>A valid coordinate.</returns>
         public Coordinate FireShot()
         {
             Printer.PrintShotHistory(Mgr.Shot.ShotHistory);
@@ -41,6 +49,9 @@ namespace Battleship.UI.Implementations
             while (true);
         }
 
+        /// <summary>
+        /// The flow for placing ships for human players.
+        /// </summary>
         public void PlaceShips()
         {
             Printer.PrintShipsOnBoard(Mgr.Grid.ships);

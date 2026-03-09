@@ -4,6 +4,9 @@ using Battleship.UI.Enums;
 
 namespace Battleship.UI.Interfaces
 {
+    /// <summary>
+    /// A player interface for playing the game.
+    /// </summary>
     public interface IPlayer
     {
         string Name { get; }
