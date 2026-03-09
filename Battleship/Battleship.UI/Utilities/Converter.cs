@@ -2,8 +2,16 @@
 
 namespace Battleship.UI.Utilities
 {
+    /// <summary>
+    /// A class used to convert values to and from coordinates.
+    /// </summary>
     public static class Converter
     {
+        /// <summary>
+        /// Converts a coordinate by its x and y values in order to determine its element for the printer.
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <returns></returns>
         public static int CoordinateToElement(Coordinate coordinate)
         {
             int element = 0;
@@ -79,6 +87,11 @@ namespace Battleship.UI.Utilities
             return element;
         }
 
+        /// <summary>
+        /// Converts a coordinate to be expressed as a string.
+        /// </summary>
+        /// <param name="coord"></param>
+        /// <returns></returns>
         public static string CoordinateToString(Coordinate coord)
         {
             string letter = "";
@@ -120,6 +133,11 @@ namespace Battleship.UI.Utilities
             return $"{letter}{coord.Y}";
         }
 
+        /// <summary>
+        /// Converts a string letter to an integer value.
+        /// </summary>
+        /// <param name="letter"></param>
+        /// <returns></returns>
         public static int LetterToNumber(string letter)
         {
             switch (letter.ToUpper())
@@ -149,6 +167,11 @@ namespace Battleship.UI.Utilities
             }
         }
 
+        /// <summary>
+        /// Converts a coordinate in string form to a coordinate object.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static Coordinate? StringToCoordinate(string c)
         {
             if (int.TryParse(c.Substring(1), out int y))

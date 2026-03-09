@@ -2,8 +2,15 @@
 
 namespace Battleship.UI.Utilities
 {
+    /// <summary>
+    /// A class used to print to the console.
+    /// </summary>
     public static class Printer
     {
+        /// <summary>
+        /// Prints a hit message if a fired shot matches.
+        /// </summary>
+        /// <param name="name"></param>
         public static void PrintHit(string name)
         {
             if (name == "Computer")
@@ -16,6 +23,10 @@ namespace Battleship.UI.Utilities
             }
         }
 
+        /// <summary>
+        /// Prints a miss message if a fired shot misses.
+        /// </summary>
+        /// <param name="name"></param>
         public static void PrintMiss(string name)
         {
             if (name == "Computer")
@@ -28,6 +39,13 @@ namespace Battleship.UI.Utilities
             }
         }
 
+        /// <summary>
+        /// Prints the current score of both players.
+        /// </summary>
+        /// <param name="name1"></param>
+        /// <param name="score1"></param>
+        /// <param name="name2"></param>
+        /// <param name="score2"></param>
         public static void PrintScore(string name1, int score1, string name2, int score2)
         {
             Console.WriteLine("========================================================");
@@ -35,6 +53,11 @@ namespace Battleship.UI.Utilities
             Console.WriteLine("========================================================");
         }
 
+        /// <summary>
+        /// Prints the details of the current ship to place.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="size"></param>
         public static void PrintShipInfo(string name, int size)
         {
             Console.WriteLine("=============================================");
@@ -42,6 +65,10 @@ namespace Battleship.UI.Utilities
             Console.WriteLine("=============================================");
         }
 
+        /// <summary>
+        /// Prints the current ships places on the game board.
+        /// </summary>
+        /// <param name="ships"></param>
         public static void PrintShipsOnBoard(Ship[] ships)
         {
             string[] elements = new string[100];
@@ -118,6 +145,10 @@ namespace Battleship.UI.Utilities
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /// <summary>
+        /// Prints the shot history and their results on the game board.
+        /// </summary>
+        /// <param name="shotHistory"></param>
         public static void PrintShotHistory(ShotHistoryCoordinate[] shotHistory)
         {
             string[] elements = new string[100];
@@ -204,6 +235,10 @@ namespace Battleship.UI.Utilities
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /// <summary>
+        /// Prints a sunk message if a shot sunk a ship.
+        /// </summary>
+        /// <param name="name"></param>
         public static void PrintSunk(string name)
         {
             if (name == "Computer")
@@ -216,6 +251,9 @@ namespace Battleship.UI.Utilities
             }
         }
 
+        /// <summary>
+        /// Prints the title screen of the game.
+        /// </summary>
         public static void PrintTitle()
         {
             Console.WriteLine("==========================");
