@@ -1,5 +1,8 @@
 ﻿namespace Battleship.UI.DTOs
 {
+    /// <summary>
+    /// Base class for coordinates.
+    /// </summary>
     public class Coordinate
     {
         public int X { get; private set; }

@@ -2,6 +2,9 @@
 {
     public class Ship
     {
+        /// <summary>
+        /// Used for all things relating to an individual ship.
+        /// </summary>
         public string? Name { get; private set; }
         public int Size { get; private set; }
         public bool IsSunk { get; private set; }
@@ -17,6 +20,11 @@
             Coordinates = new Coordinate[size];
         }
 
+        /// <summary>
+        /// Assigns the coordinates of a ship to its coordinates array.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="startingCoordinate"></param>
         public void FillCoordinates(string direction, Coordinate startingCoordinate)
         {
             for (int i = 0; i < Coordinates?.Length; i++)
@@ -32,6 +40,10 @@
             }
         }
 
+        /// <summary>
+        /// Reduces the hits left of a ship by one.
+        /// </summary>
+        /// <returns>A boolean value.</returns>
         public bool TakeHit()
         {
             HitsLeft--;
