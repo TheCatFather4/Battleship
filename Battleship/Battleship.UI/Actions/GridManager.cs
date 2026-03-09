@@ -3,6 +3,9 @@ using Battleship.UI.Enums;
 
 namespace Battleship.UI.Actions
 {
+    /// <summary>
+    /// A class used for managing a player's gameboard.
+    /// </summary>
     public class GridManager
     {
         public Ship[] ships { get; private set; }
@@ -12,6 +15,13 @@ namespace Battleship.UI.Actions
             ships = new Ship[5];
         }
 
+        /// <summary>
+        /// Adds a ship to the player's array of ships.
+        /// </summary>
+        /// <param name="name">Name of the ship.</param>
+        /// <param name="size">The ship's length.</param>
+        /// <param name="direction">The direction the ship is placed in.</param>
+        /// <param name="startingCoordinate">The first coordinate position.</param>
         public void AddShip(string name, int size, string direction, Coordinate startingCoordinate)
         {
             Ship ship = new Ship(name, size);
@@ -28,6 +38,13 @@ namespace Battleship.UI.Actions
             }
         }
 
+        /// <summary>
+        /// Determines whether a ship placement will go off the game board.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="startingCoordinate"></param>
+        /// <param name="shipSize"></param>
+        /// <returns>An enum indicating the result.</returns>
         public ShipPlacementResult IsOffGrid(string direction, Coordinate startingCoordinate, int shipSize)
         {
             if (direction == "V")
@@ -54,6 +71,14 @@ namespace Battleship.UI.Actions
             }
         }
 
+        /// <summary>
+        /// Determines whether a ship placement will overlap with other ships already placed on the game board.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="startingCoordinate"></param>
+        /// <param name="shipSize"></param>
+        /// <param name="ships"></param>
+        /// <returns>An enum indicating the result.</returns>
         public ShipPlacementResult IsAvailable(string direction, Coordinate startingCoordinate, int shipSize, Ship[] ships)
         {
             int startX;

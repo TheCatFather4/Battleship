@@ -5,8 +5,16 @@ using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Factories
 {
+    /// <summary>
+    /// A factory class for creating a new player.
+    /// </summary>
     public class PlayerFactory
     {
+        /// <summary>
+        /// Creates a new player depending on user input.
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns>An implementation of the IPlayer interface.</returns>
         public IPlayer CreateNewPlayer(int num)
         {
             PlayerType playerType;
