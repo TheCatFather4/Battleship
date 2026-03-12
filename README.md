@@ -25,7 +25,7 @@ If a computer player is selected, the user is prompted to select a difficulty le
 The difficulty options are as follows:<br>
 • Easy Mode: The computer fires a completely random shot.<br>
 • Normal Mode: The computer scores a hit 30% of the time.<br>
-• Hard Mode: The computer scores a hit 50% of the time.<br>
+• Hard Mode: The computer scores a hit 40% of the time.<br>
 ##
 ### Placing Ships
 
@@ -42,4 +42,20 @@ The order of ship placement is as follows:<br>
 Each ship placement will involve the user responding to two prompts:<br>
 1. The starting coordinate: e.g. A1, D2, G3, etc.<br>
 2. The placement direction: vertical or horizontal<br>
+##
+### Firing Shots
+After the ships are placed, the user is prompted to select a coordinate to fire at.<br>
+
+There are three results that can come from firing a shot:<br>
+• Hit (A ship was hit)<br> 
+• Miss (The shot missed)<br>
+• Hit and Sunk (The last coordinate of a ship was hit. It is now sunk)<br>
+
+If a player sinks an opponent's ship, they get one point added to their score<br>
+The first player to five points wins the game.<br>
+##
+### Unit Tests
+This application is unit tested.<br>
+Both the grid and the firing of shots have their own test classes.<br>
+Check out the Battleship.Tests project above to see the code!<br>
 ##
