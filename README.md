@@ -72,5 +72,5 @@ The first player to five points wins the game.<br>
 
 This application is unit tested.<br>
 Both the grid and the firing of shots have their own test classes.<br>
-Check out the Battleship.Tests project above to see the code!<br>
+Check out the [Battleship.Tests](https://github.com/TheCatFather4/Battleship/tree/main/Battleship/Battleship.Tests) project to see the test cdoe!<br>
 ##
