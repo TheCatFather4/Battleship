@@ -1,7 +1,14 @@
 ﻿namespace Battleship.UI.Utilities
 {
+    /// <summary>
+    /// Used to prompt the user in the console.
+    /// </summary>
     public static class Prompter
     {
+        /// <summary>
+        /// Prompts the user to press any key to continue.
+        /// </summary>
+        /// <param name="words"></param>
         public static void AnyKey(string words)
         {
             Console.Write($"Press any key to {words}...");
@@ -9,6 +16,10 @@
             Console.Clear();
         }
 
+        /// <summary>
+        /// Prompts the user to select a difficulty mode.
+        /// </summary>
+        /// <returns></returns>
         public static string GetDifficultyMode()
         {
             do
@@ -32,6 +43,11 @@
             while (true);
         }
 
+        /// <summary>
+        /// Promtps the user to select a direction to place their ship.
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
         public static string GetPlacementDirection(string prompt)
         {
             do
@@ -55,6 +71,11 @@
             while (true);
         }
 
+        /// <summary>
+        /// Prompts the user for their name.
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
         public static string GetPlayerName(string prompt)
         {
             do
@@ -74,6 +95,11 @@
             while (true);
         }
 
+        /// <summary>
+        /// Prompts the user for a coordinate in string format.
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
         public static string GetStringCoordinate(string prompt)
         {
             int number;

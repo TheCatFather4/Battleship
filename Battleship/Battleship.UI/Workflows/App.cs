@@ -5,8 +5,14 @@ using Battleship.UI.Utilities;
 
 namespace Battleship.UI.Workflows
 {
+    /// <summary>
+    /// The class that runs the application workflow.
+    /// </summary>
     public class App
     {
+        /// <summary>
+        /// Runs the battleship console application workflow.
+        /// </summary>
         public void Run()
         {
             PlayerFactory factory = new PlayerFactory();

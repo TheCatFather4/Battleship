@@ -3,8 +3,17 @@ using Battleship.UI.Interfaces;
 
 namespace Battleship.UI.Utilities
 {
+    /// <summary>
+    /// Used to increase the difficulty of the computer player.
+    /// </summary>
     public static class ShotDifficulty
     {
+        /// <summary>
+        /// The computer fires a shot and has a 40% chance at a hit.
+        /// </summary>
+        /// <param name="ships"></param>
+        /// <param name="cp"></param>
+        /// <returns></returns>
         public static Coordinate? FireShotHardMode(Ship[] ships, IPlayer cp)
         {
             Random rng = new Random();
@@ -39,6 +48,12 @@ namespace Battleship.UI.Utilities
             return null;
         }
 
+        /// <summary>
+        /// The computer fires a shot and has a 30% chance at a hit.
+        /// </summary>
+        /// <param name="ships"></param>
+        /// <param name="cp"></param>
+        /// <returns></returns>
         public static Coordinate? FireShotNormalMode(Ship[] ships, IPlayer cp)
         {
             Random rng = new Random();
