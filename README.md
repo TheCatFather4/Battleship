@@ -1,4 +1,4 @@
-# Battleship
+# :passenger_ship: Battleship :passenger_ship:
 
 ## About
 This repository contains code to run the classic game; Battleship.<br>
@@ -31,7 +31,7 @@ The difficulty options are as follows:<br>
 • Hard Mode: The computer scores a hit 40% of the time.<br>
 ##
 
-### Placing Ships
+### :ship: Placing Ships :anchor:
 
 <img src="/Images/battleship4.png" alt="placing a ship" />
 
@@ -48,7 +48,7 @@ Each ship placement will involve the user responding to two prompts:<br>
 2. The placement direction: vertical or horizontal<br>
 ##
 
-### Firing Shots
+### :dart: Firing Shots
 
 <img src="/Images/battleship5.png" alt="firing a shot" />
 
@@ -66,7 +66,7 @@ If a player sinks an opponent's ship, they get one point added to their score<br
 The first player to five points wins the game.<br>
 ##
 
-### Unit Tests
+### :test_tube: Unit Tests
 
 <img src="/Images/battleship7.png" alt="successful unit tests" />
 
