@@ -74,3 +74,9 @@ This application is unit tested.<br>
 Both the grid and the firing of shots have their own test classes.<br>
 Check out the [Battleship.Tests](https://github.com/TheCatFather4/Battleship/tree/main/Battleship/Battleship.Tests) project to see the test cdoe!<br>
 ##
+
+### 🖥️ How to use this application
+
+Simply clone this repository to your local machine and open the solution with a compatible IDE.<br>
+I developed this application using Visual Studio 2022, so I recommend using that.<br>
+##
