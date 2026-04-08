@@ -6,6 +6,8 @@ The appplication was written in C#, using Visual Studio 2022.<br>
 
 <img src="/Images/battleship1.png" alt="title screen" />
 
+🛳️ ---> [Try out my web demo here!](https://www.jmarcello.dev/Battleship) <--- 🛳️
+
 ##
 
 ## Features
