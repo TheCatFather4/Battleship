@@ -1,16 +1,40 @@
 ﻿namespace Battleship.UI.DTOs
 {
+    /// <summary>
+    /// Represents an individual ship.
+    /// </summary>
     public class Ship
     {
         /// <summary>
-        /// Used for all things relating to an individual ship.
+        /// The name of the ship.
         /// </summary>
         public string? Name { get; private set; }
+
+        /// <summary>
+        /// The size of the ship.
+        /// </summary>
         public int Size { get; private set; }
+
+        /// <summary>
+        /// Represents the ship's status. True if sunk, false if afloat.
+        /// </summary>
         public bool IsSunk { get; private set; }
+
+        /// <summary>
+        /// Represents how many hits left a ship has until it is sunk.
+        /// </summary>
         public int HitsLeft { get; private set; }
+
+        /// <summary>
+        /// The ship's coordinates. The amount of coordinates depends on the ship's size.
+        /// </summary>
         public Coordinate[]? Coordinates { get; private set; }
 
+        /// <summary>
+        /// Initializes a <c>Ship</c> with a name, size, status, hits remaining, and an array of coordinates.
+        /// </summary>
+        /// <param name="name">The name of the ship.</param>
+        /// <param name="size">The size of the ship.</param>
         public Ship(string name, int size)
         {
             Name = name;
@@ -21,10 +45,10 @@
         }
 
         /// <summary>
-        /// Assigns the coordinates of a ship to its coordinates array.
+        /// Assigns the coordinates of the ship based on direction, starting coordinate, and the length of its coordinate array.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="startingCoordinate"></param>
+        /// <param name="direction">The direction to assign coordinates.</param>
+        /// <param name="startingCoordinate">The starting coordinate to begin from.</param>
         public void FillCoordinates(string direction, Coordinate startingCoordinate)
         {
             for (int i = 0; i < Coordinates?.Length; i++)
@@ -41,9 +65,9 @@
         }
 
         /// <summary>
-        /// Reduces the hits left of a ship by one.
+        /// Subtracts 1 from the ship's HitsLeft property.
         /// </summary>
-        /// <returns>A boolean value.</returns>
+        /// <returns>A <c>bool</c>; true if ship is sunk, false if ship is still afloat.</returns>
         public bool TakeHit()
         {
             HitsLeft--;
