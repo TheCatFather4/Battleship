@@ -9,15 +9,17 @@ namespace Battleship.Tests
     [TestFixture]
     public class ShotTests
     {
-        public GameManager SetUpGrid()
+        private GameManager _mgr;
+
+        [SetUp]
+        public void SetUpGrid()
         {
-            var mgr = new GameManager();
-            mgr.Grid.AddShip("Aircraft Carrier", 5, "V", new Coordinate(1, 1));
-            mgr.Grid.AddShip("Battleship", 4, "V", new Coordinate(1, 3));
-            mgr.Grid.AddShip("Cruiser", 3, "V", new Coordinate(1, 5));
-            mgr.Grid.AddShip("Submarine", 3, "V", new Coordinate(1, 7));
-            mgr.Grid.AddShip("Destroyer", 2, "V", new Coordinate(1, 9));
-            return mgr;
+            _mgr = new GameManager();
+            _mgr.Grid.AddShip("Aircraft Carrier", 5, "V", new Coordinate(1, 1));
+            _mgr.Grid.AddShip("Battleship", 4, "V", new Coordinate(1, 3));
+            _mgr.Grid.AddShip("Cruiser", 3, "V", new Coordinate(1, 5));
+            _mgr.Grid.AddShip("Submarine", 3, "V", new Coordinate(1, 7));
+            _mgr.Grid.AddShip("Destroyer", 2, "V", new Coordinate(1, 9));
         }
 
         [Test]
@@ -36,18 +38,16 @@ namespace Battleship.Tests
         [Test]
         public void ReceiveShot_Hit()
         {
-            var mgr = SetUpGrid();
-            var result = mgr.ReceiveShot(new Coordinate(3, 1));
+            var result = _mgr.ReceiveShot(new Coordinate(3, 1));
             Assert.That(result, Is.EqualTo(ShotResult.Hit));
         }
 
         [Test]
         public void ReceiveShot_HitAndSunk()
         {
-            var mgr = SetUpGrid();
-            var result = mgr.ReceiveShot(new Coordinate(1, 5));
-            var result2 = mgr.ReceiveShot(new Coordinate(2, 5));
-            var result3 = mgr.ReceiveShot(new Coordinate(3, 5));
+            var result = _mgr.ReceiveShot(new Coordinate(1, 5));
+            var result2 = _mgr.ReceiveShot(new Coordinate(2, 5));
+            var result3 = _mgr.ReceiveShot(new Coordinate(3, 5));
             Assert.That(result, Is.EqualTo(ShotResult.Hit));
             Assert.That(result2, Is.EqualTo(ShotResult.Hit));
             Assert.That(result3, Is.EqualTo(ShotResult.HitAndSunk));
@@ -56,8 +56,7 @@ namespace Battleship.Tests
         [Test]
         public void ReceiveShot_Miss()
         {
-            var mgr = SetUpGrid();
-            var result = mgr.ReceiveShot(new Coordinate(6, 1));
+            var result = _mgr.ReceiveShot(new Coordinate(6, 1));
             Assert.That(result, Is.EqualTo(ShotResult.Miss));
         }
     }
