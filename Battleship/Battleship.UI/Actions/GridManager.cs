@@ -4,23 +4,29 @@ using Battleship.UI.Enums;
 namespace Battleship.UI.Actions
 {
     /// <summary>
-    /// A class used for managing a player's gameboard.
+    /// Represents a player's gameboard with their ships.
     /// </summary>
     public class GridManager
     {
+        /// <summary>
+        /// The player's fleet of ships.
+        /// </summary>
         public Ship[] ships { get; private set; }
 
+        /// <summary>
+        /// Initializes a <c>GridManager</c> with a fleet of 5 ships.
+        /// </summary>
         public GridManager()
         {
             ships = new Ship[5];
         }
 
         /// <summary>
-        /// Adds a ship to the player's array of ships.
+        /// Adds a ship to the player's fleet.
         /// </summary>
         /// <param name="name">Name of the ship.</param>
         /// <param name="size">The ship's length.</param>
-        /// <param name="direction">The direction the ship is placed in.</param>
+        /// <param name="direction">The direction to place the ship.</param>
         /// <param name="startingCoordinate">The first coordinate position.</param>
         public void AddShip(string name, int size, string direction, Coordinate startingCoordinate)
         {
@@ -39,12 +45,12 @@ namespace Battleship.UI.Actions
         }
 
         /// <summary>
-        /// Determines whether a ship placement will go off the game board.
+        /// Checks to see if a ship placement will be outside the bounds of the grid.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="startingCoordinate"></param>
-        /// <param name="shipSize"></param>
-        /// <returns>An enum indicating the result.</returns>
+        /// <param name="direction">The direction to place the ship.</param>
+        /// <param name="startingCoordinate">The starting coordinate position.</param>
+        /// <param name="shipSize">The size of the ship.</param>
+        /// <returns>A <c>ShipPlacementResult</c> enum indicating the result.</returns>
         public ShipPlacementResult IsOffGrid(string direction, Coordinate startingCoordinate, int shipSize)
         {
             if (direction == "V")
@@ -72,12 +78,12 @@ namespace Battleship.UI.Actions
         }
 
         /// <summary>
-        /// Determines whether a ship placement will overlap with other ships already placed on the game board.
+        /// Checks to see if a ship placement will overlap with other ships already on the gameboard.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="startingCoordinate"></param>
-        /// <param name="shipSize"></param>
-        /// <param name="ships"></param>
+        /// <param name="direction">The direction to be placed.</param>
+        /// <param name="startingCoordinate">The starting coordinate position.</param>
+        /// <param name="shipSize">The size of the ship.</param>
+        /// <param name="ships">The player's fleet of ships.</param>
         /// <returns>An enum indicating the result.</returns>
         public ShipPlacementResult IsAvailable(string direction, Coordinate startingCoordinate, int shipSize, Ship[] ships)
         {

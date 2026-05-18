@@ -5,14 +5,28 @@ using Battleship.UI.Utilities;
 namespace Battleship.UI.Actions
 {
     /// <summary>
-    /// A class used to manage a player's game state.
+    /// Represents a player's game state.
     /// </summary>
     public class GameManager
     {
+        /// <summary>
+        /// The player's gameboard. Contains the player's ships and their respective state.
+        /// </summary>
         public GridManager Grid { get; private set; }
+
+        /// <summary>
+        /// The player's shot history. Keeps track of coordinates fired at.
+        /// </summary>
         public ShotHistoryManager Shot { get; private set; }
+
+        /// <summary>
+        /// The player's current score.
+        /// </summary>
         public int Score { get; private set; }
 
+        /// <summary>
+        /// Initializes a <c>GameManager</c> with a <c>GridManager</c>, <c>ShotHistoryManager</c>, and <c>Score</c>.
+        /// </summary>
         public GameManager()
         {
             Grid = new GridManager();
@@ -31,10 +45,10 @@ namespace Battleship.UI.Actions
         /// <summary>
         /// Places a ship on a human player's gameboard.
         /// </summary>
-        /// <param name="playerName"></param>
-        /// <param name="shipName"></param>
-        /// <param name="size"></param>
-        /// <returns>An enum indicating the result.</returns>
+        /// <param name="playerName">The name of the player.</param>
+        /// <param name="shipName">The name of the ship to place.</param>
+        /// <param name="size">The size of the ship.</param>
+        /// <returns>A <c>ShipPlacementResult</c> enum indicating the result.</returns>
         public ShipPlacementResult PlaceShipOnBoard(string playerName, string shipName, int size)
         {
             Printer.PrintShipInfo(shipName, size);
@@ -77,10 +91,10 @@ namespace Battleship.UI.Actions
 
         /// <summary>
         /// Receives a shot fired from another player.
-        /// The shot is compared with the player's ship coordinates.
+        /// The incoming coordinate is compared with the receiving player's ship coordinates.
         /// </summary>
-        /// <param name="shot">The incoming shot.</param>
-        /// <returns>An enum indicating the result of the shot.</returns>
+        /// <param name="shot">The incoming shot in coordinate form.</param>
+        /// <returns>A <c>ShotResult</c> enum indicating the result.</returns>
         public ShotResult ReceiveShot(Coordinate shot)
         {
 
